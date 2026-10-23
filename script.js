@@ -1,57 +1,85 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const todoInput = document.getElementById("todo-input");
-  const addTaskbutton = document.getElementById("add-task-btn");
-  const todoList = document.getElementById("todo-list");
+//Example-1
+document
+  .getElementById("changeTextButton")
+  .addEventListener("click", function () {
+    let paragraph = document.getElementById("myParagraph");
+    paragraph.textContent = "the paragraph is changed";
+  });
+//Example-2
 
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  tasks.forEach((task) => renderTask(task));
-
-  addTaskbutton.addEventListener("click", () => {
-    const taskText = todoInput.value.trim();
-
-    if (taskText === "") return;
-    const newTask = {
-      id: Date.now(),
-      text: taskText,
-      completed: false,
-    };
-    tasks.push(newTask);
-    saveTasks();
-    renderTask(newTask)
-    todoInput.value = ""; //clear input
-    console.log(tasks);
+document
+  .getElementById("highlightFirstCity")
+  .addEventListener("click", function () {
+    let citiesList = document.getElementById("citiesList");
+    //  console.log((citiesList));
+    //  log(citiesList.firstElementChild)
+    citiesList.firstElementChild.classList.add("highlight");
   });
 
-  function renderTask(task) {
-    // console.log(task.text);
-    const li = document.createElement("li");
-    li.setAttribute("date-id", task.id);
+//Example-3
+document.getElementById("changeOrder").addEventListener("click", function () {
+  let coffeeType = document.getElementById("coffeeType");
+  coffeeType.textContent = "Espresso";
+  coffeeType.style.backgroundColor = "brown";
+  coffeeType.style.padding = "5px";
+});
 
-    if (task.completed) li.classList.add("completed");
+//Example-4
+document.getElementById("addNewItem").addEventListener("click", function () {
+  let newItem = document.createElement("li");
+  newItem.textContent = "egg";
+  document.getElementById("shoppingList").appendChild(newItem);
+});
+//Example-5
 
-    todoList.innerHTML = `
-    <span>${task.text}</span>
-    <button>delete</button>
-    `;
+document
+  .getElementById("removeLastTask")
+  .addEventListener("click", function () {
+    let taskList = document.getElementById("taskList");
+    taskList.lastElementChild.remove();
+  });
 
-    li.addEventListener("click", (e) => {
-      if (e.target.tagName === "BUTTON") return;
-      task.completed = !task.completed;
-      li.classList.toggle("completed");
-      saveTasks();
-    });
+//Example-6
 
-    li.querySelector("button").addEventListener("click", (e) => {
-      e.stopPropagation(); //prevent toggle from firing
-      tasks = tasks.filter((t) => t.id !== task.id);
-      li.remove()
-      saveTasks()
-    });
+document
+  .getElementById("clickMeButton")
+  .addEventListener("dblclick", function () {
+    alert("Hello");
+  });
 
-    todoList.appendChild(li);
-  }
+//Example-7
 
-  function saveTasks() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+document.getElementById("teaList").addEventListener("click", function (event) {
+  // let teaItem=document.getElementById("teaItem")
+  //   console.log(event.target);
+  if (event.target && event.target.matches(".teaItem")) {
+    alert("You Selected:" + event.target.textContent);
   }
 });
+
+//Example-8
+
+document
+  .getElementById("feedbackForm")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    let feedback = document.getElementById("feedbackInput").value;
+    console.log(feedback);
+    document.getElementById("feedbackDisplay").textContent =
+      `feedback is: ${feedback}`;
+  });
+
+//Example-9
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("domStatus").textContent = "DOM fully loaded.";
+});
+
+//Example 10
+
+document
+  .getElementById("toggleHighLight")
+  .addEventListener("click", function () {
+    let decriptionText = document.getElementById("descriptionText");
+    descriptionText.classList.toggle("highlight");
+  });
